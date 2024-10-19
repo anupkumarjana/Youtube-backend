@@ -1,74 +1,79 @@
 # Youtube Backend
 
-    - [Model Link ](https://app.eraser.io/workspace/YtPqZ1VogxGy1jzIDkzj)
+- [Model Link](https://app.eraser.io/workspace/YtPqZ1VogxGy1jzIDkzj)
 
 ## Folder Structure (Industry Practises)
 
-    -public
-        -temp
-            -.gitkeep
+-public
+-temp
+-.gitkeep
 
-    -src
-        (files)
-        -index.js
-        -app.js
-        -constant.js
+-src
+(files)
+-index.js
+-app.js
+-constant.js
 
-        (folders)
-        -DB
-        -Models
-        -Controllers
-        -Routes
-        -Middlewares
-        -Utils
+    (folders)
+    -DB
+    -Models
+    -Controllers
+    -Routes
+    -Middlewares
+    -Utils
 
-    - .env
-    - .gitignore
-    - .prettierrc
-    - .prettierignore
+- .env
+- .gitignore
+- .prettierrc
+- .prettierignore
 
 ## installations
 
-    - npm i -D prettier
-        -.prettierrc (to standarize the code formatting)
-        -.prettierignore ( in which files not to standarize code formatting)
+- npm i -D prettier
+- **`.prettierrc`**: To standardize code formatting.
+- **`.prettierignore`**: Files to exclude from code formatting.
 
-    - npm i -D nodemon
+- npm i -D nodemon
 
 ## Database Connection
 
-    .env
-        - PORT
-        - MongoDB-URL
+## Database Connection
 
-    constants.js
-        - Database Name (which is not that much important to keep in .env file)
+**`.env`**
 
-    - Always use `try-catch` or `(res,rej)` promise when connecting to database.
-    - Database is always in another continent. So it can take time when performing any operation. So, to avoid errors, always use `async-await`.
+- `PORT`
+- `MongoDB_URI`
 
-    ```javascript
-    import mongoose from "mongoose";
-    import { DB_NAME } from "../constants.js";
+**`constants.js`**
 
-    const connectDB = async () => {
-    try {
-    // this is for database connection
-    const connectionInstace = await mongoose.connect(
-    `${process.env.MONGODB_URI}/${DB_NAME}`
+- Store non-sensitive data like the database name here.
+
+**Best Practices for Database Connection:**
+
+- Always use `try-catch` or `(res, rej)` promises for error handling.
+- Use `async-await` since database operations can take time due to network latency (especially if the DB is hosted remotely).
+
+### Database Connection Code
+
+```javascript
+import mongoose from "mongoose";
+import { DB_NAME } from "../constants.js";
+
+const connectDB = async () => {
+  try {
+    // Database connection
+    const connectionInstance = await mongoose.connect(
+      `${process.env.MONGODB_URI}/${DB_NAME}`
     );
 
-        console.log(
-        `\n MongoDB connected!! DB HOST ${connectionInstace.connection.host}` // this is a professional technique to see in what database we're connected to
-        );
+    console.log(
+      `\nMongoDB connected!! DB HOST: ${connectionInstance.connection.host}`
+    ); // Log the host for professional debugging
+  } catch (error) {
+    console.error("MongoDB connection error:", error);
+    process.exit(1); // Exit process with failure
+  }
+};
 
-    } catch (error) {
-    console.log("MongoDb connection error: ", error);
-    // process
-    }
-    };
-
-    export default connectDB;
-
-```
+export default connectDB;
 
