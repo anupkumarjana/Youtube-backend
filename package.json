@@ -1,0 +1,15 @@
+{
+  "name": "youtube-backend",
+  "version": "1.0.0",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "javascipt",
+    "backend"
+  ],
+  "author": "Anup Kumar Jana",
+  "license": "ISC",
+  "description": ""
+}
